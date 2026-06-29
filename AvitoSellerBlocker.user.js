@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Avito Seller Blocker
 // @namespace    http://tampermonkey.net/
-// @version      2.4
+// @version      2.5
 // @description  Block unwanted sellers on Avito with single-button approach
 // @match        *://www.avito.ru/*
 // @grant        GM_addStyle
@@ -11,8 +11,8 @@
     'use strict';
 
     const PRODUCT_CARD_SELECTOR = 'div[itemtype="http://schema.org/Product"]';
-    const SELLER_LINK_SELECTOR = 'a[href*="/brands/"][href*="search_seller_info"]';
-    const BRAND_CODE_REGEX = /\/brands\/([a-z0-9]+)\?/;
+    const SELLER_LINK_SELECTOR = 'a[href*="search_seller_info"]';
+    const BRAND_CODE_REGEX = /\/((brands)|(user))\/([a-z0-9]+)/;
     const STORAGE_KEY = 'avito_blocked_sellers_v2';
     const BUTTON_SIZE = 30;
     const BUTTON_OFFSET = 8;
@@ -214,7 +214,7 @@
         const link = card.querySelector(SELLER_LINK_SELECTOR);
         if (!link) return null;
         const match = (link.getAttribute('href') || '').match(BRAND_CODE_REGEX);
-        return match ? match[1] : null;
+        return match ? match[4] : null;
     }
 
     function getSellerNameFromCard(card) {
