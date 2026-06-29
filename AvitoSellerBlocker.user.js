@@ -4,6 +4,7 @@
 // @version      2.5
 // @description  Block unwanted sellers on Avito with single-button approach
 // @match        *://www.avito.ru/*
+// @license      MIT
 // @grant        GM_addStyle
 // ==/UserScript==
 
